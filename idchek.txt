@@ -1,0 +1,12 @@
+<?php
+include("mysql_connect.php");
+$id = $_POST['id'];
+$pw = $_POST['pw'];
+
+$sql = "SELECT * FROM member where account='$id' and password='$pw'";
+$row = mysql_fetch_array(mysql_query($sql));
+if (!$row) { // add this check.
+				echo "<h3>帳號或密碼錯誤，請重新輸入</h3>";
+        		echo '<meta http-equiv=REFRESH CONTENT=2;url=reading.php>';
+}
+?>
