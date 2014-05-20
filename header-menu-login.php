@@ -10,9 +10,9 @@ if($account == null)
 		<div class="ui pointing dropdown link item">
 			<i class="large icon settings"></i> 功能表 <i class="dropdown icon"></i>
 			<div class="menu">
-				<a href="reading_connect.php"class="item"><i class="book icon"></i>開始閱讀</a>
-				<a href="record_connect.php"class="item"><i class="date basic icon"></i>歷史紀錄</a>
-				
+				<a href="reading_connect.php"class="item"><i class="book icon"></i>我的選課</a>
+				<a href="record_connect.php"class="item"><i class="date basic icon"></i>我的歷史紀錄</a>
+				<a href="record_connect.php"class="item"><i class="date basic icon"></i>更多其他課程</a>
 			</div>
 		</div>
 		<a href="index.php"class="item">

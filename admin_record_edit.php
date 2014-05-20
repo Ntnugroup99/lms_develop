@@ -3,12 +3,8 @@
 <head>
 <?php
 	include("mysql_connect.php");
-	$serial = $_POST['select2']; 
-	$button = $_POST['button2'];
+
 	
-	$serial_array = explode("+",$serial); // serial+account
-	$serial_number = $serial_array[0];
-	$account = $serial_array[1];
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Learning Management System Sample</title>
@@ -33,60 +29,32 @@
 		<br/>
 		<br/>
 		<center>
-		<?php
-			/* reading */
-			if($button === "新增"){
-		?>
-				<form name="form" method="post" action="admin_record_done.php">
-					<p>
-						序號：<input type="text" name="serial" /> <br>
-						帳號：</h1><input type="text" name="account" /> <br>
-						時間：</h1><input type="text" name="time" /> <br>
-						評論：</h1><input type="text" name="comments" /> <br>
-					</p>
-					<input type="submit" name="button" value="新增" />
-					<p>
-					</p>
-				</form>
-		<?php
-			}
-			else if($button === "修改"){
+
 				
-				$sql = "SELECT * FROM record WHERE serial='$serial_number' AND account='$account'";
+				<?php
+
+				$sql = "SELECT record.account, reading.name, record.time, record.comments FROM record JOIN reading ON reading.serial=record.serial";
 				$result = mysql_query($sql);
 											
 				if (!$result) { // add this check.
 					die('Invalid query: ' . mysql_error());
 				}
-				else{
-					$row = mysql_fetch_array(mysql_query($sql));
+				
+				echo "<table width=800 border=1>";
+				echo "<tr align=center><td>姓名</td><td>資料名</td><td>時間</td><td>評論</td></tr>";		
+					
+				while($row = mysql_fetch_array($result)){
+					echo "<tr align=center><td>".$row['account']."</td>";
+					echo "<td>".$row['name']."</td>";
+					echo "<td>".$row['time']."</td>";
+					echo "<td>".$row['comments']."</td>";
+					echo "</tr>";
+				}
+				echo "</table>";
+			
 		?>
-					<form name="form" method="post" action="admin_record_done.php">
-						<p>
-						序號：<input type="text" name="serial" value="<?php echo $row['serial']; ?>" /> <br>
-						帳號：</h1><input type="text" name="account" value="<?php echo $row['account']; ?>" /> <br>
-						時間：</h1><input type="text" name="time" value="<?php echo $row['time']; ?>" /> <br>
-						評論：</h1><input type="text" name="comments" value="<?php echo $row['comments']; ?>" /> <br>
-						</p>
-						<input type="submit" name="button" value="修改" />
-						<p>
-						</p>
-					</form>
-		<?php
-				}
-			}
-			else if($button === "刪除"){
-				$sql = "DELETE FROM record WHERE serial='$serial_number' AND account='$account'";
-				$result = mysql_query($sql);
-											
-				if (!$result) { // add this check.
-					die('Invalid query: ' . mysql_error());
-				}
-				else{
-					echo "<h3>資料已刪除.....</h3>";
-				}
-			}	
-		?>
+	<a href="kmean.php">kmean分析</a>
+		
 		</center>
 	</p>	
 </div>
