@@ -53,49 +53,19 @@
 
 <article>
 	
-	 <!-- 暫時借放
-		<div class="ui large vertical inverted labeled icon sidebar menu" id="menu">
-			  <a class="item">
-				<i class="home icon"></i>
-				Home
-			  </a>
-			  <a class="active item">
-				<i class="heart icon"></i>
-				Current Section
-			  </a>
-			  <a class="item">
-				<i class="facebook icon"></i>
-				Like us on Facebook
-			  </a>
-			  <div class="item">
-				<b>More</b>
-				<div class="menu">
-				  <a class="item">About</a>
-				  <a class="item">Contact Us</a>
-				</div>
-			  </div>
-			</div>
-			-->
-	<div id="left">
-	<!--
-		<div class="ui black launch right attached button" id="button">
-		  <i class="icon list layout"></i>
-		  <span class="text">選單</span>
-    </div>
-	-->
-	</div>
+
 	<div id="right">
 		<h2 class="ui header">
 					<i class="settings icon"></i>
 						<div class="content">
-						選課資訊
-							<div class="sub header">我已經選擇的課程</div>
+						課程資訊
+							<div class="sub header">所有課程總覽</div>
 						</div>
 					</h2>
 		
 		<?php 
 		/*取得選課資料*/
-		$sql = "SELECT * FROM selection,courses where account='$account' and selection.c_id=courses.c_id";
+		$sql = "SELECT * FROM courses";
 		$result = mysql_query($sql);
 											
 				if (!$result) { // add this check.
@@ -103,25 +73,29 @@
 					}
 					while($row = mysql_fetch_array($result)){
 					?>
-						<div class="ui blue segment massive celled animated list">
+						<div class="ui blue segment celled selection list">
 							<div class="item">
-								<a class="right floated big red ui button">取消此課程</a>
-								<a class="right floated big teal ui button">點我進入課程</a>
 								
-								<i class="big checked checkbox icon"></i>
+									<div class="ui large image">
+										<img src="images/<?php echo $row['c_img']; ?>">
+									</div>
+									<a href="course_detail.php?c_id=<?php echo $row['c_id']; ?>" class="right floated big teal ui button">課程詳細資訊</a>
+									
 									<div class="content">
-										<div class="header"><?php echo $row['c_name']; ?></div>
-									<div class="description">選課時間：<?php echo $row['s_date']; ?></div>
-										</div>
+										<h2 class="ui left aligned header">
+											課程名稱：
+										</h2>
+										<h2 class="ui inverted blue block left aligned header">
+											<?php echo $row['c_name']; ?>
+										</h2>
+										<p class="description">開課時間：<?php echo $row['c_date']; ?>~<?php echo $row['c_due']; ?></p>
+									</div>
 							</div>
 							
 						</div>
 					
 					<?php } ?>
-					<div class="massive blue ui icon labeled button">
-								<i class="pencil icon"></i>
-								<div class="visible content">更多其他課程</div>
-							</div>
+					
 	
 	</div>
 	
