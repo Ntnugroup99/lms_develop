@@ -79,7 +79,7 @@
 									<div class="ui large image">
 										<img src="images/<?php echo $row['c_img']; ?>">
 									</div>
-									<a href="course_detail.php?c_id=<?php echo $row['c_id']; ?>" class="right floated big teal ui button">課程詳細資訊</a>
+									<a href="course_detail.php?c_id=<?php echo $row['c_id']; ?>&m_id=<?php echo $account; ?>" class="right floated big teal ui button">課程詳細資訊</a>
 									
 									<div class="content">
 										<h2 class="ui left aligned header">

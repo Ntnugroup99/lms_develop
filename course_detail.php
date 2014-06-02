@@ -1,3 +1,8 @@
+ <?php 
+
+$c_id = $_GET["c_id"];
+$account1=$_GET["m_id"];
+?>
  <!doctype html>
 <html >
 <head>
@@ -21,6 +26,33 @@
 	<script src="javascript/sidebar.js"></script>
 <script>
 	$(document).ready(function(){
+	
+	function submitall(){
+		var formData1 = {
+           account: '<?php echo $account1 ?>',
+		   c_id: '<?php echo $c_id ?>'
+      };
+	  $.ajax({ type: 'POST', url: 'course_chek.php', data: formData1, success: onFormSubmitted });
+	}
+	function onFormSubmitted(response) {
+       if(response=="無")
+			$('#select').css( 'display', 'block' );
+			
+		else
+			$('#selected').css( 'display', 'block' );
+			
+			
+			
+			
+			
+
+}
+
+
+	
+	
+	
+	
 	$('#menu')
 		  .sidebar('attach events', '#button')
 		;
@@ -38,14 +70,11 @@
 			})
 			;
 			
-		
+	submitall();//確認是否已有選修	
 	});
+	
 </script>
-<?php 
 
-$c_id = $_GET["c_id"];
-
-?>
 <title>學習管理系統</title>
 </head>
 
@@ -70,7 +99,7 @@ $c_id = $_GET["c_id"];
 		
 		<?php 
 		/*取得選課資料*/
-		$sql = "SELECT * FROM courses,course_detail where courses.c_id=course_detail.c_id and courses.c_id='$c_id' ";
+		$sql = "SELECT * FROM courses,course_detail,teachers where courses.c_id=course_detail.c_id and  teachers.t_id=courses.t_id and courses.c_id='$c_id' ";
 		$result = mysql_query($sql);
 		$row = mysql_fetch_array($result);									
 				if (!$result) { // add this check.
@@ -104,18 +133,18 @@ $c_id = $_GET["c_id"];
 								<?php echo $row['c_info']; ?>
 								</h4>								
 							
-							</div>
+							
 							
 							<div class="ui left floated stacked segment">
 								<div class="ui top blue huge attached label">教師簡介</div>
 								<div class="ui list">
 									<div class="item">
 										<div class=" ui circular small image">
-										<img src="images/member.jpg">
+										<img src="images/<?php echo $row['t_img']; ?>">
 										</div>
 									<div class="content">
-										<div class="ui left aligned header">羅傑安 叫獸</div>
-									國立臺灣師範大學 資訊教育究所
+										<div class="ui left aligned header"><?php echo $row['t_name']; ?>　<?php echo $row['t_pos']; ?></div>
+									<?php echo $row['t_school']; ?>　<?php echo $row['t_depart']; ?>　
 									</div>
 								</div>
 								</div>
@@ -144,9 +173,12 @@ $c_id = $_GET["c_id"];
 									</div>
 									
 								</div>
-								<a href="courses.php" class="red ui left floated icon labeled button">
+								<a href="courses.php" style="display: none;" class="red ui left floated icon labeled button" id="select">
 										<i class="pencil icon"></i>
 									<div class="visible content">加選課程</div></a>
+								<a href="courses.php" style="display: none;" class="green ui left floated icon labeled button" id="selected">
+										<i class="checkmark icon"></i>
+									<div class="visible content">課程已加選</div></a>
 								</div>
 								
 							
@@ -155,7 +187,7 @@ $c_id = $_GET["c_id"];
 							
 							</div>
 							
-							
+							</div>
 							
 							<a href="courses.php" class="huge green ui icon labeled button">
 								<i class="left icon"></i>
@@ -175,4 +207,5 @@ $c_id = $_GET["c_id"];
 
 
 </body>
+
 </html>

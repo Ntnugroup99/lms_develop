@@ -118,10 +118,10 @@
 						</div>
 					
 					<?php } ?>
-					<div class="massive blue ui icon labeled button">
+					<a href="courses.php" class="massive blue ui icon labeled button">
 								<i class="pencil icon"></i>
 								<div class="visible content">更多其他課程</div>
-							</div>
+							</a>
 	
 	</div>
 	
