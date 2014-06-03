@@ -35,18 +35,36 @@ $account1=$_GET["m_id"];
 	  $.ajax({ type: 'POST', url: 'course_chek.php', data: formData1, success: onFormSubmitted });
 	}
 	function onFormSubmitted(response) {
+		$('#select').css( 'display', 'none' );
+		$('#selected').css( 'display', 'none' );
        if(response=="無")
 			$('#select').css( 'display', 'block' );
 			
 		else
-			$('#selected').css( 'display', 'block' );
-			
-			
-			
-			
-			
+			$('#selected').css( 'display', 'block' );	
 
 }
+	$('#select').on('click', function () {//加選按鈕點擊事件
+				
+					var formData1 = {
+					   account: '<?php echo $account1 ?>',
+					   c_id: '<?php echo $c_id ?>'
+				  };
+					$.ajax({ type: 'POST', url: 'course_ins.php', data: formData1, success: onFormSubmitted });
+				
+				function onFormSubmitted(response) {
+					$('#select').css( 'display', 'none' );
+					$('#selected').css( 'display', 'none' );
+				   if(response=="無")
+						$('#select').css( 'display', 'block' );
+						
+					else
+						$('#selected').css( 'display', 'block' );	
+
+}
+				
+				
+			});
 
 
 	
@@ -143,8 +161,10 @@ $account1=$_GET["m_id"];
 										<img src="images/<?php echo $row['t_img']; ?>">
 										</div>
 									<div class="content">
+										<div class="ui huge purple pointing left label">
 										<div class="ui left aligned header"><?php echo $row['t_name']; ?>　<?php echo $row['t_pos']; ?></div>
 									<?php echo $row['t_school']; ?>　<?php echo $row['t_depart']; ?>　
+									</div>
 									</div>
 								</div>
 								</div>
@@ -173,7 +193,7 @@ $account1=$_GET["m_id"];
 									</div>
 									
 								</div>
-								<a href="courses.php" style="display: none;" class="red ui left floated icon labeled button" id="select">
+								<a style="display: none;" class="red ui left floated icon labeled button" id="select">
 										<i class="pencil icon"></i>
 									<div class="visible content">加選課程</div></a>
 								<a href="courses.php" style="display: none;" class="green ui left floated icon labeled button" id="selected">

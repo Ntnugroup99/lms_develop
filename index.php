@@ -85,7 +85,7 @@
 										<h2 class="ui left aligned header">
 											課程名稱：
 										</h2>
-										<h2 class="ui inverted blue block left aligned header">
+										<h2 class="ui inverted blue block left aligned header ">
 											<?php echo $row['c_name']; ?>
 										</h2>
 										
