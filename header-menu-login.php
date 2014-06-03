@@ -11,8 +11,8 @@ if($account == null)
 			<i class="large icon settings"></i> 功能表 <i class="dropdown icon"></i>
 			<div class="menu">
 				<a href="my_courses.php"class="item"><i class="book icon"></i>我的選課</a>
-				<a href="record_connect.php"class="item"><i class="date basic icon"></i>我的歷史紀錄</a>
-				<a href="courses.php"class="item"><i class="expand  icon"></i>更多其他課程</a>
+				<a href="record_connect.php"class="item"><i class="date basic icon"></i>我的選課紀錄</a>
+			
 			</div>
 		</div>
 		<a href="index.php"class="item">

@@ -21,10 +21,14 @@
 	<script src="javascript/sidebar.js"></script>
 <script>
 	$(document).ready(function(){
-	$('#menu')
-		  .sidebar('attach events', '#button')
-		;
-	
+		$('#menu')
+			  .sidebar('attach events', '#button')
+			;
+		$('.confirmation').on('click', function () {
+				return confirm('Are you sure?');
+			});
+			
+			//dropdown須至底
 		$('.ui.dropdown')
 			.dropdown({
 				on: 'hover',
@@ -37,6 +41,7 @@
 				event.stopImmediatePropagation();
 			})
 			;
+		 
 			
 		
 	});
@@ -105,7 +110,7 @@
 					?>
 						<div class="ui blue segment massive celled animated list">
 							<div class="item">
-								<a class="right floated big red ui button">取消此課程</a>
+								<a href="index.php"  class="right floated big red ui button confirmation">取消此課程</a>
 								<a class="right floated big teal ui button">點我進入課程</a>
 								
 								<i class="big checked checkbox icon"></i>
@@ -118,7 +123,7 @@
 						</div>
 					
 					<?php } ?>
-					<a href="courses.php" class="massive blue ui icon labeled button">
+					<a href="index.php" class="massive blue ui icon labeled button">
 								<i class="pencil icon"></i>
 								<div class="visible content">更多其他課程</div>
 							</a>

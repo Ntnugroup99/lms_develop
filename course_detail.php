@@ -189,7 +189,7 @@ $account1=$_GET["m_id"];
 							
 							</div>
 							
-							<a href="courses.php" class="huge green ui icon labeled button">
+							<a href="index.php" class="huge green ui icon labeled button">
 								<i class="left icon"></i>
 								<div class="visible content">回上一頁</div>
 							</a>
