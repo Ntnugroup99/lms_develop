@@ -66,12 +66,12 @@
 		<?php 
 		/*取得選課資料*/
 		$sql = "SELECT * FROM courses";
-		$result = mysql_query($sql);
-											
+		$result = mysql_query($sql);								
 				if (!$result) { // add this check.
 					die('Invalid query: ' . mysql_error());
 					}
 					while($row = mysql_fetch_array($result)){
+					
 					?>
 						<div class="ui blue segment celled selection list">
 							<div class="item">
@@ -79,7 +79,7 @@
 									<div class="ui large image">
 										<img src="images/<?php echo $row['c_img']; ?>">
 									</div>
-									<a href="course_detail.php?c_id=<?php echo $row['c_id']; ?>&m_id=<?php echo $account; ?>" class="right floated big teal ui button">課程詳細資訊</a>
+									<a href="course_detail.php?c_id=<?php echo $row['c_id']; ?>" class="right floated big teal ui button">課程詳細資訊</a>
 									
 									<div class="content">
 										<h2 class="ui left aligned header">

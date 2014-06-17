@@ -45,6 +45,14 @@
         {
           type   : 'empty',
           prompt : '請輸入用戶名'
+        },
+		{
+          type   : 'maxLength[10]',
+          prompt : '請輸入小於10位數'
+        },
+		{
+          type   : 'contains[\!]',
+          prompt : '須包含一個!(驚嘆號)'
         }
       ]
     },

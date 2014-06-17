@@ -113,7 +113,7 @@
 						<div class="ui blue segment massive celled animated list">
 							<div class="item">
 								<a href="course_delete.php?account=<?php echo $row['account']; ?>&c_id=<?php echo $row['c_id']; ?>" class="right floated big red ui button confirmation">取消此課程</a>
-								<a class="right floated big teal ui button">點我進入課程</a>
+								<a href="course.php?account=<?php echo $row['account']; ?>&c_id=<?php echo $row['c_id']; ?>" class="right floated big teal ui button">點我進入課程</a>
 								
 								<i class="big checked checkbox icon"></i>
 									<div class="content">

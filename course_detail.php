@@ -1,8 +1,4 @@
- <?php 
 
-$c_id = $_GET["c_id"];
-$account1=$_GET["m_id"];
-?>
  <!doctype html>
 <html >
 <head>
@@ -24,74 +20,7 @@ $account1=$_GET["m_id"];
 	<link href='css/lms.css' rel='stylesheet' type='text/css'>
 	<script src="javascript/button.js"></script>
 	<script src="javascript/sidebar.js"></script>
-<script>
-	$(document).ready(function(){
-	
-	function submitall(){
-		var formData1 = {
-           account: '<?php echo $account1 ?>',
-		   c_id: '<?php echo $c_id ?>'
-      };
-	  $.ajax({ type: 'POST', url: 'course_chek.php', data: formData1, success: onFormSubmitted });
-	}
-	function onFormSubmitted(response) {
-		$('#select').css( 'display', 'none' );
-		$('#selected').css( 'display', 'none' );
-       if(response=="無")
-			$('#select').css( 'display', 'block' );
-			
-		else
-			$('#selected').css( 'display', 'block' );	
 
-}
-	$('#select').on('click', function () {//加選按鈕點擊事件
-				
-					var formData1 = {
-					   account: '<?php echo $account1 ?>',
-					   c_id: '<?php echo $c_id ?>'
-				  };
-					$.ajax({ type: 'POST', url: 'course_ins.php', data: formData1, success: onFormSubmitted });
-				
-				function onFormSubmitted(response) {
-					$('#select').css( 'display', 'none' );
-					$('#selected').css( 'display', 'none' );
-				   if(response=="無")
-						$('#select').css( 'display', 'block' );
-						
-					else
-						$('#selected').css( 'display', 'block' );	
-
-}
-				
-				
-			});
-
-
-	
-	
-	
-	
-	$('#menu')
-		  .sidebar('attach events', '#button')
-		;
-	
-		$('.ui.dropdown')
-			.dropdown({
-				on: 'hover',
-				action: 'hide'
-			})
-		;//Drop down
-		$('.ui.button')
-			.on('click', function(event) {
-				$('.ui.button').dropdown('toggle');
-				event.stopImmediatePropagation();
-			})
-			;
-			
-	submitall();//確認是否已有選修	
-	});
-	
-</script>
 
 <title>學習管理系統</title>
 </head>
@@ -116,10 +45,13 @@ $account1=$_GET["m_id"];
 					</h2>
 		
 		<?php 
+		$c_id = $_GET["c_id"];
+		$account1=$_SESSION["account_lms"];
 		/*取得選課資料*/
 		$sql = "SELECT * FROM courses,course_detail,teachers where courses.c_id=course_detail.c_id and  teachers.t_id=courses.t_id and courses.c_id='$c_id' ";
 		$result = mysql_query($sql);
-		$row = mysql_fetch_array($result);									
+		if(!($row = mysql_fetch_array($result))==null)
+			{
 				if (!$result) { // add this check.
 					die('Invalid query: ' . mysql_error());
 					}
@@ -214,7 +146,13 @@ $account1=$_GET["m_id"];
 								<div class="visible content">回上一頁</div>
 							</a>
 						
-					
+				<?php 
+	
+	}else
+		echo "無課程顯示";
+	
+	
+	?>	
 					
 	
 	</div>
@@ -227,5 +165,72 @@ $account1=$_GET["m_id"];
 
 
 </body>
+<script>
+	$(document).ready(function(){
+	
+	function submitall(){
+		var formData1 = {
+           account: '<?php echo $account1 ?>',
+		   c_id: '<?php echo $c_id ?>'
+      };
+	  $.ajax({ type: 'POST', url: 'course_chek.php', data: formData1, success: onFormSubmitted });
+	}
+	function onFormSubmitted(response) {
+		$('#select').css( 'display', 'none' );
+		$('#selected').css( 'display', 'none' );
+       if(response=="無")
+			$('#select').css( 'display', 'block' );
+			
+		else
+			$('#selected').css( 'display', 'block' );	
 
+}
+	$('#select').on('click', function () {//加選按鈕點擊事件
+				
+					var formData1 = {
+					   account: '<?php echo $account1 ?>',
+					   c_id: '<?php echo $c_id ?>'
+				  };
+					$.ajax({ type: 'POST', url: 'course_ins.php', data: formData1, success: onFormSubmitted });
+				
+				function onFormSubmitted(response) {
+					$('#select').css( 'display', 'none' );
+					$('#selected').css( 'display', 'none' );
+				   if(response=="無")
+						$('#select').css( 'display', 'block' );
+						
+					else
+						$('#selected').css( 'display', 'block' );	
+
+}
+				
+				
+			});
+
+
+	
+	
+	
+	
+	$('#menu')
+		  .sidebar('attach events', '#button')
+		;
+	
+		$('.ui.dropdown')
+			.dropdown({
+				on: 'hover',
+				action: 'hide'
+			})
+		;//Drop down
+		$('.ui.button')
+			.on('click', function(event) {
+				$('.ui.button').dropdown('toggle');
+				event.stopImmediatePropagation();
+			})
+			;
+			
+	submitall();//確認是否已有選修	
+	});
+	
+</script>
 </html>
